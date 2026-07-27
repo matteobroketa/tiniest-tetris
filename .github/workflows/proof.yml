@@ -17,7 +17,7 @@ jobs:
     name: Shell helper syntax
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Check shell helpers
         shell: bash
         run: bash -n tools/*.sh
@@ -27,7 +27,7 @@ jobs:
     needs: shell-syntax
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
@@ -58,7 +58,7 @@ jobs:
       matrix:
         python: ['3.8.16', '3.14']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
@@ -122,7 +122,7 @@ jobs:
             scripted: candidates/scripted/py2/tetris_256.py
             stub: proofs/stubs/py2
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
