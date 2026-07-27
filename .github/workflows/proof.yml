@@ -43,7 +43,7 @@ jobs:
           mkdir -p proof-artifacts
           python proofs/make_report.py | tee proof-artifacts/static-report.md
           cat proof-artifacts/static-report.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: static-proof-report
           path: proof-artifacts/static-report.md
@@ -98,7 +98,7 @@ jobs:
             cat proof-artifacts/randomized.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: native-python-${{ matrix.python }}-proof
           path: proof-artifacts/
@@ -183,7 +183,7 @@ jobs:
             cat proof-artifacts/randomized.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: native-python-${{ matrix.version }}-proof
           path: proof-artifacts/
