@@ -7,6 +7,7 @@ ARG PREFIX=/opt/cpython
 COPY docker/dist/${ARCHIVE} /tmp/${ARCHIVE}
 
 RUN printf 'deb http://archive.debian.org/debian squeeze main\n' > /etc/apt/sources.list \
+ && printf 'deb http://archive.debian.org/debian-security squeeze/updates main\n' >> /etc/apt/sources.list \
  && printf 'Acquire::Check-Valid-Until "false";\nAcquire::AllowInsecureRepositories "true";\n' > /etc/apt/apt.conf.d/99archive \
  && apt-get -o Acquire::Check-Valid-Until=false -o Acquire::AllowInsecureRepositories=true update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated --no-install-recommends \

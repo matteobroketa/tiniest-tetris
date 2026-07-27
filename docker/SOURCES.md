@@ -2,6 +2,8 @@
 
 `tools/fetch_cpython.sh` downloads these archives directly from Python.org.
 
+The legacy build image uses the Debian Squeeze base archive together with its archived security updates. The latter supplies development packages compatible with the `libc6` version already present in the Squeeze image.
+
 | Runtime | Archive | Integrity check |
 |---|---|---|
 | CPython 1.6 | `https://www.python.org/ftp/python/src/Python-1.6.tar.gz` | MD5 `9d72ef93d7698769d9d3be7c17d5ad92`; historical FreeBSD ports distinfo; expected size 4,114,315 bytes |
