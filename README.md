@@ -55,7 +55,7 @@ The native runtime matrix is:
 |---|---|
 | CPython 1.6 | Built from the official source archive in a Debian Squeeze container |
 | CPython 2.7.18 | Built from the official source archive in a Debian Squeeze container |
-| CPython 3.8.20 | `actions/setup-python` |
+| CPython 3.8.16 | `actions/setup-python` |
 | CPython 3.14.x (latest available) | `actions/setup-python` |
 
 Each job uploads a proof log as a workflow artifact. The static job also writes a compact report to the GitHub Actions job summary.
@@ -67,16 +67,16 @@ CI proves that the committed files have the stated size and behavior in the stat
 Current Python 3 environment:
 
 ```sh
-./tools/prove_current.sh
+bash tools/prove_current.sh
 ```
 
 Historical interpreter containers:
 
 ```sh
-image=$(./tools/build_legacy_image.sh 1.6)
+image=$(bash tools/build_legacy_image.sh 1.6)
 docker run --rm "$image" python -V
 
-image=$(./tools/build_legacy_image.sh 2.7.18)
+image=$(bash tools/build_legacy_image.sh 2.7.18)
 docker run --rm "$image" python -V
 ```
 

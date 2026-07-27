@@ -1,7 +1,7 @@
 .PHONY: proof proof-static report clean
 
 proof:
-	./tools/prove_current.sh
+	bash tools/prove_current.sh
 
 proof-static:
 	python3 proofs/verify_manifest.py

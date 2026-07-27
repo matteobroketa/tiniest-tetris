@@ -13,8 +13,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  shell-syntax:
+    name: Shell helper syntax
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check shell helpers
+        shell: bash
+        run: bash -n tools/*.sh
+
   static-proof:
     name: Bytes, hashes, payloads, fixtures
+    needs: shell-syntax
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -33,7 +43,7 @@ jobs:
           mkdir -p proof-artifacts
           python proofs/make_report.py | tee proof-artifacts/static-report.md
           cat proof-artifacts/static-report.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: static-proof-report
           path: proof-artifacts/static-report.md
@@ -41,11 +51,12 @@ jobs:
 
   python-3-native:
     name: CPython ${{ matrix.python }} native proof
+    needs: shell-syntax
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        python: ['3.8.20', '3.14']
+        python: ['3.8.16', '3.14']
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -87,7 +98,7 @@ jobs:
             cat proof-artifacts/randomized.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: native-python-${{ matrix.python }}-proof
           path: proof-artifacts/
@@ -95,6 +106,7 @@ jobs:
 
   legacy-native:
     name: CPython ${{ matrix.version }} native proof
+    needs: shell-syntax
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     strategy:
@@ -119,7 +131,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p proof-artifacts
-          image=$(tools/build_legacy_image.sh '${{ matrix.version }}')
+          image=$(bash tools/build_legacy_image.sh '${{ matrix.version }}')
           echo "image=$image" >> "$GITHUB_OUTPUT"
           docker run --rm "$image" python -V 2>&1 | tee proof-artifacts/environment.txt
           docker image inspect "$image" --format 'image={{.Id}} created={{.Created}}' \
@@ -171,7 +183,7 @@ jobs:
             cat proof-artifacts/randomized.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: native-python-${{ matrix.version }}-proof
           path: proof-artifacts/

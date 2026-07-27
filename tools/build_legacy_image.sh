@@ -3,7 +3,7 @@ set -euo pipefail
 
 version=${1:?usage: build_legacy_image.sh VERSION}
 root=$(cd "$(dirname "$0")/.." && pwd)
-archive=$($root/tools/fetch_cpython.sh "$version")
+archive=$(bash "$root/tools/fetch_cpython.sh" "$version")
 tag="tiniest-tetris-python:$version"
 docker build \
   --file "$root/docker/legacy-python.Dockerfile" \
