@@ -1,21 +1,31 @@
 # tiniest-tetris
 
-Reproducible byte-golf record candidates for two precisely defined Python Tetris rulesets.
+[![Proof](https://github.com/matteobroketa/tiniest-tetris/actions/workflows/proof.yml/badge.svg?branch=main)](https://github.com/matteobroketa/tiniest-tetris/actions/workflows/proof.yml)
+[![CPython](https://img.shields.io/badge/CPython-1.6%20%7C%202.7.18%20%7C%203.8%2B-3776AB?logo=python&logoColor=white)](#verified-candidates)
+[![License](https://img.shields.io/badge/license-MIT%20%2B%20CC%20BY--SA%202.5-blue)](LICENSE.md)
 
-The repository treats source files as byte artifacts. GitHub Actions verifies their exact sizes and hashes, expands compressed payloads, runs a scripted oracle corpus, and exercises playable candidates in native CPython 1.6, 2.7.18, 3.8, and 3.14 environments.
+The smallest publicly documented **Python Tetris** candidates located for two precisely defined rulesets, with exact byte counts and reproducible native-runtime proofs.
 
-## Candidates
+- **Playable Tetris core:** 467 bytes on Python 1.6, 420 bytes on Python 2.7.18, and 445 bytes on Python 3.8+.
+- **Scripted Tetris simulator:** 308 bytes on Python 1.6, 256 bytes on Python 2.7.18, and 287 bytes on Python 3.8+.
 
-| Ruleset | Python target | Candidate | Bytes | Status before CI |
-|---|---|---:|---:|---|
-| Scripted simulator | CPython 1.6 | `candidates/scripted/py1/tetris_308.py` | 308 | Native proof configured |
-| Scripted simulator | CPython 2.7.18 | `candidates/scripted/py2/tetris_256.py` | 256 | Native proof configured |
-| Scripted simulator | CPython 3.8+ | `candidates/scripted/py3/tetris_287.py` | 287 | Locally verified |
-| Playable core | CPython 1.6 | `candidates/playable/py1/tetris_467.py` | 467 | Native proof configured |
-| Playable core | CPython 2.7.18 | `candidates/playable/py2/tetris_420.py` | 420 | Native proof configured |
-| Playable core | CPython 3.8+ | `candidates/playable/py3/tetris_445.py` | 445 | Locally verified |
+GitHub Actions checks every committed candidate for exact byte identity, compressed-payload identity, expected scripted output, deterministic gameplay, and randomized gameplay under native CPython 1.6, 2.7.18, 3.8.16, and 3.14.
 
-These two categories are not comparable.
+> [!IMPORTANT]
+> These are the smallest publicly documented candidates located for the exact rulesets defined in this repository.
+
+## Verified candidates
+
+| Ruleset | Python target | Candidate | Bytes | Proof status |
+|---|---|---|---:|---|
+| Scripted simulator | CPython 1.6 | [`tetris_308.py`](candidates/scripted/py1/tetris_308.py) | **308** | Native CI verified |
+| Scripted simulator | CPython 2.7.18 | [`tetris_256.py`](candidates/scripted/py2/tetris_256.py) | **256** | Native CI verified |
+| Scripted simulator | CPython 3.8+ | [`tetris_287.py`](candidates/scripted/py3/tetris_287.py) | **287** | Native CI verified |
+| Playable core | CPython 1.6 | [`tetris_467.py`](candidates/playable/py1/tetris_467.py) | **467** | Native CI verified |
+| Playable core | CPython 2.7.18 | [`tetris_420.py`](candidates/playable/py2/tetris_420.py) | **420** | Native CI verified |
+| Playable core | CPython 3.8+ | [`tetris_445.py`](candidates/playable/py3/tetris_445.py) | **445** | Native CI verified |
+
+The scripted simulator and playable core implement different specifications and their byte counts are not directly comparable.
 
 ### Scripted simulator
 
