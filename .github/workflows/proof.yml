@@ -114,7 +114,7 @@ jobs:
       matrix:
         include:
           - version: '1.6'
-            candidate: candidates/playable/py1/tetris_475.py
+            candidate: candidates/playable/py1/tetris_467.py
             scripted: candidates/scripted/py1/tetris_308.py
             stub: proofs/stubs/py1
           - version: '2.7.18'

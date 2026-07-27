@@ -43,22 +43,22 @@
     },
     {
       "id": "playable-py1",
-      "path": "candidates/playable/py1/tetris_475.py",
+      "path": "candidates/playable/py1/tetris_467.py",
       "runtime": "1.6",
       "ruleset": "playable",
       "status": "candidate",
-      "bytes": 475,
-      "sha256": "7db2641eaf65edc81c84d2c59e5575969e0bb9c6ef66573431f7112a3e0f1701",
+      "bytes": 467,
+      "sha256": "9907eb2b4fa820ea149db1c1140d639204174efe5b5a20a720dfa5699ab4cb29",
       "trailing_newline": false
     },
     {
       "id": "playable-py1-readable",
-      "path": "candidates/playable/py1/readable_673.py",
+      "path": "candidates/playable/py1/readable_664.py",
       "runtime": "1.6",
       "ruleset": "playable",
       "status": "readable",
-      "bytes": 673,
-      "sha256": "02b314a2e3014fe30f93c1e4cc9283c093239c5816098f67967baa52e52261b8",
+      "bytes": 664,
+      "sha256": "ea165fa961c3b7b2672d963f6de0d356eaa3cbb3a4f587ef0c74c3ef90daac39",
       "trailing_newline": false
     },
     {

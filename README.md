@@ -11,7 +11,7 @@ The repository treats source files as byte artifacts. GitHub Actions verifies th
 | Scripted simulator | CPython 1.6 | `candidates/scripted/py1/tetris_308.py` | 308 | Native proof configured |
 | Scripted simulator | CPython 2.7.18 | `candidates/scripted/py2/tetris_256.py` | 256 | Native proof configured |
 | Scripted simulator | CPython 3.8+ | `candidates/scripted/py3/tetris_287.py` | 287 | Locally verified |
-| Playable core | CPython 1.6 | `candidates/playable/py1/tetris_475.py` | 475 | Native proof configured |
+| Playable core | CPython 1.6 | `candidates/playable/py1/tetris_467.py` | 467 | Native proof configured |
 | Playable core | CPython 2.7.18 | `candidates/playable/py2/tetris_420.py` | 420 | Native proof configured |
 | Playable core | CPython 3.8+ | `candidates/playable/py3/tetris_445.py` | 445 | Locally verified |
 

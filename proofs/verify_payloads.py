@@ -36,7 +36,7 @@ def py3(candidate: bytes) -> bytes:
 
 pairs = [
     ("scripted-py2", "candidates/scripted/py2/tetris_256.py", "candidates/scripted/py2/readable_292.py", py2),
-    ("playable-py1", "candidates/playable/py1/tetris_475.py", "candidates/playable/py1/readable_673.py", py1),
+    ("playable-py1", "candidates/playable/py1/tetris_467.py", "candidates/playable/py1/readable_664.py", py1),
     ("playable-py2", "candidates/playable/py2/tetris_420.py", "candidates/playable/py2/readable_589.py", py2),
     ("playable-py3", "candidates/playable/py3/tetris_445.py", "candidates/playable/py3/readable_582.py", py3),
 ]
