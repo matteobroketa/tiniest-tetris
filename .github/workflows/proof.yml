@@ -133,7 +133,8 @@ jobs:
           mkdir -p proof-artifacts
           image=$(bash tools/build_legacy_image.sh '${{ matrix.version }}')
           echo "image=$image" >> "$GITHUB_OUTPUT"
-          docker run --rm "$image" python -V 2>&1 | tee proof-artifacts/environment.txt
+          docker run --rm "$image" python -c 'import sys; print sys.version' 2>&1 \
+            | tee proof-artifacts/environment.txt
           docker image inspect "$image" --format 'image={{.Id}} created={{.Created}}' \
             | tee -a proof-artifacts/environment.txt
       - name: Playable deterministic trace

@@ -36,4 +36,4 @@ RUN printf 'deb http://archive.debian.org/debian squeeze main\n' > /etc/apt/sour
 
 ENV PATH=/opt/cpython/bin:${PATH}
 WORKDIR /repo
-CMD ["python", "-V"]
+CMD ["python", "-c", "import sys; print sys.version"]

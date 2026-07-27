@@ -74,10 +74,10 @@ Historical interpreter containers:
 
 ```sh
 image=$(bash tools/build_legacy_image.sh 1.6)
-docker run --rm "$image" python -V
+docker run --rm "$image" python -c 'import sys; print sys.version'
 
 image=$(bash tools/build_legacy_image.sh 2.7.18)
-docker run --rm "$image" python -V
+docker run --rm "$image" python -c 'import sys; print sys.version'
 ```
 
 The build scripts download source archives from `python.org`, verify their recorded checksums, build interpreters under `/opt/cpython`, and confirm that `zlib` is importable. Downloaded archives are ignored by Git.
