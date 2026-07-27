@@ -2,7 +2,7 @@
 
 `tools/fetch_cpython.sh` downloads these archives directly from Python.org.
 
-The legacy build image uses the Debian Squeeze base archive together with its archived security updates. The latter supplies development packages compatible with the `libc6` version already present in the Squeeze image.
+The legacy build image uses the Debian Squeeze base archive together with the archived Squeeze LTS repository. The latter supplies development packages compatible with the final Squeeze LTS `libc6` version already present in the image.
 
 | Runtime | Archive | Integrity check |
 |---|---|---|
