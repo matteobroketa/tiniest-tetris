@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "records": [
+    {
+      "id": "scripted-py1",
+      "path": "candidates/scripted/py1/tetris_308.py",
+      "runtime": "1.6",
+      "ruleset": "scripted",
+      "status": "candidate",
+      "bytes": 308,
+      "sha256": "a704b5349d34a90e1341bfe753843c77b8834ce155333918514482736588082e",
+      "trailing_newline": false
+    },
+    {
+      "id": "scripted-py2",
+      "path": "candidates/scripted/py2/tetris_256.py",
+      "runtime": "2.7.18",
+      "ruleset": "scripted",
+      "status": "candidate",
+      "bytes": 256,
+      "sha256": "2fef6fd10bba8a0f137b84689cd79b90fad164717e0e64996ddd3b1a5a7776bb",
+      "trailing_newline": false
+    },
+    {
+      "id": "scripted-py2-readable",
+      "path": "candidates/scripted/py2/readable_292.py",
+      "runtime": "2.7.18",
+      "ruleset": "scripted",
+      "status": "readable",
+      "bytes": 292,
+      "sha256": "580683c6e676d912f588e8d4ecdbb8a033b16573322dbb7484a09e22f89800e6",
+      "trailing_newline": false
+    },
+    {
+      "id": "scripted-py3",
+      "path": "candidates/scripted/py3/tetris_287.py",
+      "runtime": "3.8+",
+      "ruleset": "scripted",
+      "status": "candidate",
+      "bytes": 287,
+      "sha256": "f1fc39ae7b457201c1cc6c854daa329e264ae76e541642f572c4260074424448",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py1",
+      "path": "candidates/playable/py1/tetris_475.py",
+      "runtime": "1.6",
+      "ruleset": "playable",
+      "status": "candidate",
+      "bytes": 475,
+      "sha256": "7db2641eaf65edc81c84d2c59e5575969e0bb9c6ef66573431f7112a3e0f1701",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py1-readable",
+      "path": "candidates/playable/py1/readable_673.py",
+      "runtime": "1.6",
+      "ruleset": "playable",
+      "status": "readable",
+      "bytes": 673,
+      "sha256": "02b314a2e3014fe30f93c1e4cc9283c093239c5816098f67967baa52e52261b8",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py2",
+      "path": "candidates/playable/py2/tetris_420.py",
+      "runtime": "2.7.18",
+      "ruleset": "playable",
+      "status": "candidate",
+      "bytes": 420,
+      "sha256": "424f521101a8ac29f3c0fcc03d0b08f228987c2c533ab5e2963b812e2d710956",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py2-readable",
+      "path": "candidates/playable/py2/readable_589.py",
+      "runtime": "2.7.18",
+      "ruleset": "playable",
+      "status": "readable",
+      "bytes": 589,
+      "sha256": "9824bc766efd249f55e80d4c534e12b6182e7646ae51f1cfa9aeb164b30cb4c8",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py3",
+      "path": "candidates/playable/py3/tetris_445.py",
+      "runtime": "3.8+",
+      "ruleset": "playable",
+      "status": "candidate",
+      "bytes": 445,
+      "sha256": "ebbfcf791fa1df5bbc80c32b4b61fc30d7c544843b0310a4def6c942f2acefb3",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py3-readable",
+      "path": "candidates/playable/py3/readable_582.py",
+      "runtime": "3.8+",
+      "ruleset": "playable",
+      "status": "readable",
+      "bytes": 582,
+      "sha256": "ce46f35e5adb8fc4d316b9c91da56cdd056ede92c76244a8bd7cde891ac0d740",
+      "trailing_newline": false
+    },
+    {
+      "id": "playable-py3-restricted",
+      "path": "candidates/playable/py3/tetris_442_restricted.py",
+      "runtime": "3.8+",
+      "ruleset": "playable-restricted",
+      "status": "experimental",
+      "bytes": 442,
+      "sha256": "7ca6dee9e28b860947adecfdc634e65adb17c6660b4f1bcd9ff11a248bd645ae",
+      "trailing_newline": false
+    }
+  ]
+}

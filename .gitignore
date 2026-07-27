@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+proofs/.tmp/
+proof-artifacts/
+docker/dist/*
+!docker/dist/.gitkeep
+.DS_Store

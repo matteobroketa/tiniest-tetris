@@ -1,0 +1,178 @@
+name: Proof
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: proof-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-proof:
+    name: Bytes, hashes, payloads, fixtures
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Verify byte manifest
+        run: python proofs/verify_manifest.py
+      - name: Verify compressed payloads
+        run: python proofs/verify_payloads.py
+      - name: Verify committed fixtures
+        run: python proofs/generate_scripted_vectors.py --check
+      - name: Create proof report
+        shell: bash
+        run: |
+          mkdir -p proof-artifacts
+          python proofs/make_report.py | tee proof-artifacts/static-report.md
+          cat proof-artifacts/static-report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-proof-report
+          path: proof-artifacts/static-report.md
+          if-no-files-found: error
+
+  python-3-native:
+    name: CPython ${{ matrix.python }} native proof
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.8.20', '3.14']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Record environment
+        shell: bash
+        run: |
+          mkdir -p proof-artifacts
+          python --version 2>&1 | tee proof-artifacts/environment.txt
+          uname -a | tee -a proof-artifacts/environment.txt
+      - name: Scripted simulator corpus
+        shell: bash
+        run: |
+          python proofs/run_scripted_suite.py candidates/scripted/py3/tetris_287.py --interpreter python \
+            | tee proof-artifacts/scripted.txt
+      - name: Playable deterministic trace
+        shell: bash
+        env:
+          PYTHONPATH: proofs/stubs/py3
+          TETRIS_KEYS: proofs/vectors/playable_keys.txt
+          PYTHONWARNINGS: ignore
+        run: python candidates/playable/py3/tetris_445.py | tee proof-artifacts/playable-trace.txt
+      - name: Playable randomized games
+        shell: bash
+        run: |
+          PYTHONPATH=proofs/stubs/py3 TETRIS_MODE=random-suite PYTHONWARNINGS=ignore \
+            python candidates/playable/py3/tetris_445.py | tee proof-artifacts/randomized.txt
+      - name: Write summary
+        shell: bash
+        run: |
+          {
+            echo "## CPython ${{ matrix.python }}"
+            echo
+            echo '```text'
+            cat proof-artifacts/environment.txt
+            cat proof-artifacts/scripted.txt
+            cat proof-artifacts/playable-trace.txt
+            cat proof-artifacts/randomized.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-python-${{ matrix.python }}-proof
+          path: proof-artifacts/
+          if-no-files-found: error
+
+  legacy-native:
+    name: CPython ${{ matrix.version }} native proof
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '1.6'
+            candidate: candidates/playable/py1/tetris_475.py
+            scripted: candidates/scripted/py1/tetris_308.py
+            stub: proofs/stubs/py1
+          - version: '2.7.18'
+            candidate: candidates/playable/py2/tetris_420.py
+            scripted: candidates/scripted/py2/tetris_256.py
+            stub: proofs/stubs/py2
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Build historical interpreter
+        id: runtime
+        shell: bash
+        run: |
+          mkdir -p proof-artifacts
+          image=$(tools/build_legacy_image.sh '${{ matrix.version }}')
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+          docker run --rm "$image" python -V 2>&1 | tee proof-artifacts/environment.txt
+          docker image inspect "$image" --format 'image={{.Id}} created={{.Created}}' \
+            | tee -a proof-artifacts/environment.txt
+      - name: Playable deterministic trace
+        shell: bash
+        run: |
+          docker run --rm \
+            -v "$PWD:/repo" -w /repo \
+            -e PYTHONPATH=/repo/${{ matrix.stub }} \
+            -e TETRIS_KEYS=/repo/proofs/vectors/playable_keys.txt \
+            '${{ steps.runtime.outputs.image }}' \
+            python '${{ matrix.candidate }}' | tee proof-artifacts/playable-trace.txt
+      - name: Playable randomized games
+        shell: bash
+        run: |
+          docker run --rm \
+            -v "$PWD:/repo" -w /repo \
+            -e PYTHONPATH=/repo/${{ matrix.stub }} \
+            -e TETRIS_MODE=random-suite \
+            '${{ steps.runtime.outputs.image }}' \
+            python '${{ matrix.candidate }}' | tee proof-artifacts/randomized.txt
+      - name: Scripted simulator corpus
+        shell: bash
+        run: |
+          mkdir -p proofs/.tmp
+          count=0
+          for input in proofs/vectors/scripted/*.in; do
+            name=$(basename "$input" .in)
+            actual="proofs/.tmp/${{ matrix.version }}-$name.out"
+            docker run --rm -i \
+              -v "$PWD:/repo" -w /repo \
+              '${{ steps.runtime.outputs.image }}' \
+              python '${{ matrix.scripted }}' < "$input" > "$actual"
+            python proofs/validate_scripted_output.py "${input%.in}.out" "$actual"
+            count=$((count+1))
+          done
+          echo "$count scripted vectors passed" | tee proof-artifacts/scripted.txt
+      - name: Write summary
+        shell: bash
+        run: |
+          {
+            echo "## CPython ${{ matrix.version }}"
+            echo
+            echo '```text'
+            cat proof-artifacts/environment.txt
+            cat proof-artifacts/scripted.txt
+            cat proof-artifacts/playable-trace.txt
+            cat proof-artifacts/randomized.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-python-${{ matrix.version }}-proof
+          path: proof-artifacts/
+          if-no-files-found: error

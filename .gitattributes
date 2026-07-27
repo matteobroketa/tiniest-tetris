@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+* text=auto eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+proofs/vectors/scripted/*.in text eol=lf
+proofs/vectors/scripted/*.out text eol=lf
+# Golfed files are byte artifacts. Never normalize or re-encode them.
+candidates/** -text
