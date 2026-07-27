@@ -20,6 +20,7 @@ RUN printf 'deb http://archive.debian.org/debian squeeze main\n' > /etc/apt/sour
     esac \
  && cd "Python-${PYTHON_VERSION}" \
  && ./configure --prefix="${PREFIX}" \
+ && mkdir -p "${PREFIX}" \
  && if [ "${PYTHON_VERSION}" = 1.6 ]; then \
       sed -i 's/^#zlib[[:space:]].*/zlib zlibmodule.c -lz/' Modules/Setup.in; \
       make; \
