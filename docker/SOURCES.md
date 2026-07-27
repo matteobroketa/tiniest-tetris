@@ -4,6 +4,8 @@
 
 The legacy build image uses the Debian Squeeze base archive together with the archived Squeeze LTS repository. The latter supplies development packages compatible with the final Squeeze LTS `libc6` version already present in the image.
 
+CPython 1.6 is built serially because its generated `Modules/Setup` and headers are not safe to create concurrently. Its zlib entry is enabled in `Modules/Setup.in`, the template from which that release generates `Setup`.
+
 | Runtime | Archive | Integrity check |
 |---|---|---|
 | CPython 1.6 | `https://www.python.org/ftp/python/src/Python-1.6.tar.gz` | MD5 `9d72ef93d7698769d9d3be7c17d5ad92`; historical FreeBSD ports distinfo; expected size 4,114,315 bytes |

@@ -20,10 +20,15 @@ RUN printf 'deb http://archive.debian.org/debian squeeze main\n' > /etc/apt/sour
     esac \
  && cd "Python-${PYTHON_VERSION}" \
  && ./configure --prefix="${PREFIX}" \
- && if grep -q '^#zlib[[:space:]]' Modules/Setup; then \
-      sed -i 's/^#zlib[[:space:]].*/zlib zlibmodule.c -lz/' Modules/Setup; \
+ && if [ "${PYTHON_VERSION}" = 1.6 ]; then \
+      sed -i 's/^#zlib[[:space:]].*/zlib zlibmodule.c -lz/' Modules/Setup.in; \
+      make; \
+    else \
+      if grep -q '^#zlib[[:space:]]' Modules/Setup; then \
+        sed -i 's/^#zlib[[:space:]].*/zlib zlibmodule.c -lz/' Modules/Setup; \
+      fi; \
+      make -j2; \
     fi \
- && make -j2 \
  && make install \
  && "${PREFIX}/bin/python" -c 'import sys,zlib;print(sys.version);print(zlib.ZLIB_VERSION)' \
  && rm -rf /tmp/Python-* /tmp/${ARCHIVE} /var/lib/apt/lists/*
