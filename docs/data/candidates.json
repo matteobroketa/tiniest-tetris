@@ -1,0 +1,94 @@
+{
+  "repository": "https://github.com/matteobroketa/tiniest-tetris",
+  "pages": "https://matteobroketa.github.io/tiniest-tetris/",
+  "challenges": {
+    "scripted": {
+      "label": "Scripted simulator",
+      "shortLabel": "Scripted",
+      "summary": "Drops fixed-orientation tetrominoes onto a supplied 10×7 board, clears complete rows, and prints the final board and score.",
+      "demo": "scripted",
+      "versions": {
+        "py1": {
+          "label": "CPython 1.6",
+          "shortLabel": "Python 1.6",
+          "bytes": 308,
+          "candidate": "assets/candidates/scripted/py1/tetris_308.py",
+          "readable": "assets/candidates/scripted/py1/tetris_308.py",
+          "repoSource": "candidates/scripted/py1/tetris_308.py",
+          "sha256": "a704b5349d34a90e1341bfe753843c77b8834ce155333918514482736588082e",
+          "proof": "Native CI verified",
+          "actualBrowserRun": false,
+          "note": "The browser demo reproduces the rules in JavaScript; the exact candidate is verified under native CPython 1.6 in GitHub Actions."
+        },
+        "py2": {
+          "label": "CPython 2.7.18",
+          "shortLabel": "Python 2.7",
+          "bytes": 256,
+          "candidate": "assets/candidates/scripted/py2/tetris_256.py",
+          "readable": "assets/candidates/scripted/py2/readable_292.py",
+          "repoSource": "candidates/scripted/py2/tetris_256.py",
+          "sha256": "2fef6fd10bba8a0f137b84689cd79b90fad164717e0e64996ddd3b1a5a7776bb",
+          "proof": "Native CI verified",
+          "actualBrowserRun": false,
+          "note": "The candidate uses Python 2's historical zip codec. The browser demo reproduces the rules in JavaScript."
+        },
+        "py3": {
+          "label": "CPython 3.8+",
+          "shortLabel": "Python 3",
+          "bytes": 287,
+          "candidate": "assets/candidates/scripted/py3/tetris_287.py",
+          "readable": "assets/candidates/scripted/py3/tetris_287.py",
+          "repoSource": "candidates/scripted/py3/tetris_287.py",
+          "sha256": "f1fc39ae7b457201c1cc6c854daa329e264ae76e541642f572c4260074424448",
+          "proof": "Native CI verified",
+          "actualBrowserRun": true,
+          "note": "The exact 287-byte source can run in-browser through Pyodide with a controlled stdin/stdout shim."
+        }
+      }
+    },
+    "playable": {
+      "label": "Playable core",
+      "shortLabel": "Playable",
+      "summary": "A 10×20 terminal game with all seven tetrominoes, clockwise rotation, gravity, collision, locking, line clearing, and game-over termination.",
+      "demo": "playable",
+      "versions": {
+        "py1": {
+          "label": "CPython 1.6",
+          "shortLabel": "Python 1.6",
+          "bytes": 467,
+          "candidate": "assets/candidates/playable/py1/tetris_467.py",
+          "readable": "assets/candidates/playable/py1/readable_664.py",
+          "repoSource": "candidates/playable/py1/tetris_467.py",
+          "sha256": "9907eb2b4fa820ea149db1c1140d639204174efe5b5a20a720dfa5699ab4cb29",
+          "proof": "Native CI verified",
+          "actualBrowserRun": false,
+          "note": "The interactive browser model follows the same bitboard mechanics. Native CPython 1.6 execution is proved in GitHub Actions."
+        },
+        "py2": {
+          "label": "CPython 2.7.18",
+          "shortLabel": "Python 2.7",
+          "bytes": 420,
+          "candidate": "assets/candidates/playable/py2/tetris_420.py",
+          "readable": "assets/candidates/playable/py2/readable_589.py",
+          "repoSource": "candidates/playable/py2/tetris_420.py",
+          "sha256": "424f521101a8ac29f3c0fcc03d0b08f228987c2c533ab5e2963b812e2d710956",
+          "proof": "Native CI verified",
+          "actualBrowserRun": false,
+          "note": "The interactive browser model follows the same bitboard mechanics. Native CPython 2.7.18 execution is proved in GitHub Actions."
+        },
+        "py3": {
+          "label": "CPython 3.8+",
+          "shortLabel": "Python 3",
+          "bytes": 445,
+          "candidate": "assets/candidates/playable/py3/tetris_445.py",
+          "readable": "assets/candidates/playable/py3/readable_582.py",
+          "repoSource": "candidates/playable/py3/tetris_445.py",
+          "sha256": "ebbfcf791fa1df5bbc80c32b4b61fc30d7c544843b0310a4def6c942f2acefb3",
+          "proof": "Native CI verified",
+          "actualBrowserRun": true,
+          "note": "The exact 445-byte source can run in-browser through Pyodide with a deterministic curses shim."
+        }
+      }
+    }
+  }
+}

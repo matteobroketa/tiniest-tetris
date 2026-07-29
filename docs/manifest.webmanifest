@@ -1,0 +1,16 @@
+{
+  "name": "tiniest-tetris",
+  "short_name": "tiny tetris",
+  "description": "Verified Python Tetris byte-golf candidates with interactive browser demonstrations.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f7fb",
+  "theme_color": "#f7f7fb",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

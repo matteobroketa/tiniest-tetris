@@ -1,0 +1,19 @@
+from curses.wrapper import*
+r=range
+def C():return x<0 or max(map(lambda i:(b[y+i]|-1024)>>x&p>>i*4&15,r(4)))
+def R():return reduce(lambda q,i:q|(p>>i&1)<<((4*i+3)%17),r(16),0)
+def f(s):
+ global b,x,y,p
+ b=[0]*20+[1023]*4;n=1;p=15;x=3;y=0;s.timeout(99)
+ while C()<1:
+  B=b*1
+  for i in r(4):B[y+i]=B[y+i]|(p>>i*4&15)<<x
+  s.addstr(0,0,'\n'.join(map(lambda v:''.join(map(lambda X,v=v:' #'[v>>X&1],r(10))),B[:20])))
+  Y=s.getch()-98;u=x;i=p;p=Y and p or R();x=x+Y*(Y%2)
+  if C():x=u;p=i
+  y=y+1
+  if C():
+   y=y-1
+   for i in r(4):b[y+i]=b[y+i]|(p>>i*4&15)<<x
+   b=filter(lambda v:v<1023,b);b=[0]*(20-len(b))+b+[1023]*4;p=ord("3'qt6c"[n%7]);n=n+1;x=3;y=0
+wrapper(f)

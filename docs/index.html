@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the smallest publicly documented Python Tetris candidates across CPython 1.6, 2.7, and 3.8+, with verified byte counts and interactive browser demos.">
+  <meta name="theme-color" content="#f7f7fb">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="tiniest-tetris — Python byte-golf records">
+  <meta property="og:description" content="Pick a challenge and Python version, inspect the exact golfed source, and play with a browser representation of the result.">
+  <meta property="og:url" content="https://matteobroketa.github.io/tiniest-tetris/">
+  <meta property="og:image" content="https://matteobroketa.github.io/tiniest-tetris/assets/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://matteobroketa.github.io/tiniest-tetris/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>tiniest-tetris — verified Python byte-golf candidates</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "tiniest-tetris",
+    "codeRepository": "https://github.com/matteobroketa/tiniest-tetris",
+    "url": "https://matteobroketa.github.io/tiniest-tetris/",
+    "programmingLanguage": ["Python 1.6", "Python 2.7", "Python 3"],
+    "description": "Reproducible byte-golf record candidates for two precisely defined Python Tetris rulesets.",
+    "license": "https://github.com/matteobroketa/tiniest-tetris/blob/main/LICENSE.md"
+  }
+  </script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#explorer">Skip to candidate explorer</a>
+
+  <div class="announcement">
+    <div class="page-width announcement-inner">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>Native CI verified on CPython 1.6, 2.7.18, 3.8 and current Python 3</span>
+      <a href="https://github.com/matteobroketa/tiniest-tetris/actions/workflows/proof.yml">View proof run</a>
+    </div>
+  </div>
+
+  <header class="site-nav page-width">
+    <a class="brand" href="#top" aria-label="tiniest-tetris home">
+      <span class="brand-mark" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span>tiniest-tetris</span>
+    </a>
+    <nav aria-label="Project navigation">
+      <a href="#explorer">Explorer</a>
+      <a href="#proofs">Proofs</a>
+      <a class="nav-cta" href="https://github.com/matteobroketa/tiniest-tetris">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero page-width">
+      <div class="hero-copy">
+        <p class="kicker"><span>Byte golf</span> × Python history</p>
+        <h1>Tiny code.<br><em>Real Tetris.</em></h1>
+        <p class="hero-lede">Six verified candidates across three generations of Python. Inspect every byte, compare the runtimes, and watch the same mechanics come alive in the browser.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#explorer">Explore the candidates</a>
+          <a class="button ghost" href="https://github.com/matteobroketa/tiniest-tetris/blob/main/PROOFS.md">Read the methodology</a>
+        </div>
+        <div class="hero-facts" aria-label="Project facts">
+          <div><strong>256</strong><span>smallest bytes</span></div>
+          <div><strong>6</strong><span>verified candidates</span></div>
+          <div><strong>4</strong><span>native runtimes</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Abstract tetromino composition">
+        <div class="visual-glow"></div>
+        <div class="floating-card card-one">
+          <span>Python 2.7</span>
+          <strong>256 B</strong>
+          <small>scripted simulator</small>
+        </div>
+        <div class="floating-card card-two">
+          <span>Python 3.8+</span>
+          <strong>445 B</strong>
+          <small>playable core</small>
+        </div>
+        <div class="tetromino-field" aria-hidden="true">
+          <span class="block b1"></span><span class="block b2"></span><span class="block b3"></span><span class="block b4"></span>
+          <span class="block b5"></span><span class="block b6"></span><span class="block b7"></span><span class="block b8"></span>
+          <span class="block b9"></span><span class="block b10"></span><span class="block b11"></span><span class="block b12"></span>
+          <span class="block b13"></span><span class="block b14"></span><span class="block b15"></span><span class="block b16"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="explorer page-width" id="explorer" aria-labelledby="explorer-title">
+      <div class="explorer-heading">
+        <div>
+          <p class="section-label">Interactive candidate explorer</p>
+          <h2 id="explorer-title">Choose a ruleset and runtime</h2>
+        </div>
+        <span class="proof-pill" id="proof-pill">Loading proof status…</span>
+      </div>
+
+      <div class="selection-bar">
+        <label class="select-control">
+          <span class="select-icon" aria-hidden="true">▦</span>
+          <span class="select-copy"><small>Challenge</small><strong>Ruleset</strong></span>
+          <select id="challenge-select" aria-describedby="candidate-summary">
+            <option value="scripted">Scripted simulator</option>
+            <option value="playable" selected>Playable core</option>
+          </select>
+        </label>
+        <div class="selection-divider" aria-hidden="true"></div>
+        <label class="select-control">
+          <span class="select-icon python-icon" aria-hidden="true">⌁</span>
+          <span class="select-copy"><small>Runtime</small><strong>Python version</strong></span>
+          <select id="version-select">
+            <option value="py1">CPython 1.6</option>
+            <option value="py2">CPython 2.7.18</option>
+            <option value="py3" selected>CPython 3.8+</option>
+          </select>
+        </label>
+        <div class="selection-summary">
+          <span id="metric-bytes">—</span>
+          <small>exact candidate size</small>
+        </div>
+      </div>
+
+      <p id="candidate-summary" class="candidate-summary">Loading candidate metadata…</p>
+
+      <div class="workspace" aria-label="Candidate source and demonstration">
+        <article class="source-card">
+          <header class="card-header">
+            <div>
+              <span class="card-kicker">Exact committed artifact</span>
+              <h3>Source code</h3>
+            </div>
+            <div class="card-actions">
+              <button class="icon-action" id="copy-source" type="button" title="Copy source">Copy</button>
+              <a class="icon-action" id="download-source" download>Download</a>
+            </div>
+          </header>
+
+          <div class="source-toolbar">
+            <div class="tabs" role="tablist" aria-label="Source view">
+              <button type="button" role="tab" aria-selected="true" class="tab active" id="tab-golfed" data-tab="golfed">Golfed</button>
+              <button type="button" role="tab" aria-selected="false" class="tab" id="tab-readable" data-tab="readable">Readable</button>
+            </div>
+            <span id="source-filename">—</span>
+          </div>
+
+          <div class="editor-shell">
+            <div class="editor-topbar">
+              <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>python</span>
+              <span id="source-view-note">Exact byte artifact</span>
+            </div>
+            <pre class="code-window" tabindex="0" aria-label="Selected Python source"><code id="source-code">Loading…</code></pre>
+          </div>
+
+          <footer class="source-footer">
+            <div><span>Runtime</span><strong id="metric-runtime">—</strong></div>
+            <div class="hash"><span>SHA-256</span><code id="metric-hash">—</code></div>
+          </footer>
+        </article>
+
+        <article class="demo-card">
+          <header class="card-header">
+            <div>
+              <span class="card-kicker">Behavior preview</span>
+              <h3>Tetris playground</h3>
+            </div>
+            <span class="runtime-pill" id="runtime-pill">JavaScript model</span>
+          </header>
+
+          <div class="playground-stage">
+            <div class="terminal-shell" aria-label="Tetris terminal demonstration">
+              <div class="terminal-titlebar">
+                <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+                <span id="terminal-title">tiniest-tetris</span>
+                <span class="terminal-state" id="terminal-state">ready</span>
+              </div>
+              <pre id="terminal-output" class="terminal-output" aria-live="polite">Loading demo…</pre>
+            </div>
+
+            <div class="playground-controls">
+              <div class="main-controls">
+                <button class="round-control play" id="start-demo" type="button">Start</button>
+                <button class="round-control" id="step-demo" type="button">Step</button>
+                <button class="round-control" id="reset-demo" type="button">Reset</button>
+              </div>
+
+              <div class="key-controls" id="key-controls" aria-label="Playable game controls">
+                <button type="button" data-key="left"><kbd>A</kbd><span>Left</span></button>
+                <button type="button" data-key="rotate"><kbd>B</kbd><span>Rotate</span></button>
+                <button type="button" data-key="right"><kbd>C</kbd><span>Right</span></button>
+              </div>
+
+              <label class="speed-control">
+                <span>Playback speed</span>
+                <input id="speed-control" type="range" min="50" max="600" step="25" value="175">
+              </label>
+
+              <button class="exact-python" id="run-python" type="button" disabled>
+                <span aria-hidden="true">▶</span> Run exact Python
+              </button>
+            </div>
+          </div>
+
+          <p class="demo-note" id="demo-note">The representative demo follows the same bitboard mechanics as the selected candidate.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="proof-section page-width" id="proofs" aria-labelledby="proof-title">
+      <div class="proof-intro">
+        <p class="section-label">Reproducible by design</p>
+        <h2 id="proof-title">The demo shows it.<br>The CI proves it.</h2>
+        <p>The browser is the visual layer. The repository’s native-runtime matrix independently verifies the exact files, byte counts, compressed payloads, deterministic traces and randomized games.</p>
+        <a href="https://github.com/matteobroketa/tiniest-tetris/actions/workflows/proof.yml">Open the proof workflow <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="proof-grid">
+        <article><span>01</span><h3>Byte identity</h3><p>Every artifact is checked for exact size, hash, encoding and trailing bytes.</p></article>
+        <article><span>02</span><h3>Native runtimes</h3><p>CPython 1.6 and 2.7 are built and executed alongside modern Python 3.</p></article>
+        <article><span>03</span><h3>Behavior traces</h3><p>Scripted vectors and seeded playable games make every result reproducible.</p></article>
+        <article><span>04</span><h3>Open challenge</h3><p>Beat a candidate without weakening its specification or its proof suite.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <div>
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>tiniest-tetris</span>
+        </a>
+        <p>Independent code-golf research. “Tetris” is used descriptively; this project is not affiliated with The Tetris Company.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="https://github.com/matteobroketa/tiniest-tetris/blob/main/SPECIFICATIONS.md">Specifications</a>
+        <a href="https://github.com/matteobroketa/tiniest-tetris/blob/main/PROOFS.md">Proofs</a>
+        <a href="https://github.com/matteobroketa/tiniest-tetris/blob/main/LICENSE.md">License</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
