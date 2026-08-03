@@ -110,7 +110,6 @@ proofs/           Independent oracles, fixtures, stubs, and hash manifest
 docker/           Historical CPython build environment
 tools/            Local proof and runtime-build commands
 .github/workflows GitHub Actions proof matrix
-PUBLISHING.md     First-push and release checklist
 ```
 
 ## Prior art and attribution
